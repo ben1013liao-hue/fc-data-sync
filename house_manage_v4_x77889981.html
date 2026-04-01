@@ -3,45 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FF14 FC-AL Asset Manager v4.0</title>
+    <title>FF14 FC Asset Manager v4.0</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Noto+Sans+TC:wght@300;400;500;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Etro palette */
             --bg-page:    #1a1d23;
             --bg-card:    #22262e;
             --bg-row:     #1e2229;
             --bg-header:  #181b21;
             --bg-input:   #14171c;
             --bg-active:  #2a3040;
-
             --cyan:       #4fc3f7;
-            --cyan-dim:   rgba(79,195,247,0.15);
+            --cyan-dim:   rgba(79,195,247,0.12);
             --cyan-border:rgba(79,195,247,0.35);
             --orange:     #ffb74d;
-            --orange-dim: rgba(255,183,77,0.15);
+            --orange-dim: rgba(255,183,77,0.12);
             --orange-border:rgba(255,183,77,0.35);
             --green:      #81c784;
-            --green-dim:  rgba(129,199,132,0.15);
+            --green-dim:  rgba(129,199,132,0.12);
             --green-border:rgba(129,199,132,0.35);
             --red:        #e57373;
-            --red-dim:    rgba(229,115,115,0.15);
+            --red-dim:    rgba(229,115,115,0.12);
             --red-border: rgba(229,115,115,0.35);
-            --purple:     #ce93d8;
-
-            --text-bright: #e8ecf0;
-            --text-main:   #c8cdd5;
-            --text-sub:    #8a93a0;
-            --text-muted:  #525c6a;
-
-            --border:      rgba(255,255,255,0.07);
-            --border-mid:  rgba(255,255,255,0.13);
-            --border-cyan: rgba(79,195,247,0.4);
+            --text-bright:#e8ecf0;
+            --text-main:  #c8cdd5;
+            --text-sub:   #8a93a0;
+            --text-muted: #525c6a;
+            --border:     rgba(255,255,255,0.07);
+            --border-mid: rgba(255,255,255,0.13);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
         body {
             background: var(--bg-page);
             color: var(--text-main);
@@ -50,128 +42,156 @@
             min-height: 100vh;
             padding: 1.5rem 1rem;
         }
-
         .max-w { max-width: 960px; margin: 0 auto; }
 
-        /* ── HEADER ── */
+        /* HEADER */
         header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 1.5rem; padding-bottom: 1rem;
             border-bottom: 1px solid var(--border-mid);
-            flex-wrap: wrap;
-            gap: 0.875rem;
+            flex-wrap: wrap; gap: 0.875rem;
         }
-
         .logo-area { display: flex; align-items: center; gap: 0.875rem; }
-
         .logo-emblem {
             width: 42px; height: 42px;
-            border: 1.5px solid var(--cyan);
+            border: 1.5px solid var(--cyan); background: var(--cyan-dim);
             display: flex; align-items: center; justify-content: center;
             transform: rotate(45deg); flex-shrink: 0;
-            background: var(--cyan-dim);
         }
         .logo-emblem-inner {
             width: 24px; height: 24px;
             border: 1px solid rgba(79,195,247,0.4);
             display: flex; align-items: center; justify-content: center;
         }
-        .logo-emblem-dot {
-            width: 5px; height: 5px;
-            background: var(--cyan);
-            transform: rotate(-45deg);
-        }
-
-        .logo-title {
-            font-family: 'Cinzel', serif;
-            font-size: 1.05rem; font-weight: 700;
-            color: var(--cyan);
-            letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2;
-        }
-        .logo-sub {
-            font-size: 0.7rem; color: var(--text-muted);
-            letter-spacing: 0.08em; margin-top: 3px;
-            font-family: 'Share Tech Mono', monospace;
-        }
-
+        .logo-emblem-dot { width: 5px; height: 5px; background: var(--cyan); transform: rotate(-45deg); }
+        .logo-title { font-family: 'Cinzel', serif; font-size: 1.05rem; font-weight: 700; color: var(--cyan); letter-spacing: 0.15em; text-transform: uppercase; line-height: 1.2; }
+        .logo-sub { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.08em; margin-top: 3px; font-family: 'Share Tech Mono', monospace; }
         .header-actions { display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; }
-
         .btn-sheet {
             display: flex; align-items: center; gap: 0.4rem;
-            padding: 0.45rem 1rem;
-            background: var(--green-dim); border: 1px solid var(--green-border);
+            padding: 0.45rem 1rem; background: var(--green-dim); border: 1px solid var(--green-border);
             color: var(--green); font-size: 0.75rem; font-weight: 700;
             letter-spacing: 0.06em; text-decoration: none; transition: all 0.15s;
         }
-        .btn-sheet:hover { background: rgba(129,199,132,0.25); }
-
-        .sync-dot {
-            display: inline-flex; align-items: center; gap: 0.4rem;
-            font-size: 0.68rem; color: var(--text-muted);
-            font-family: 'Share Tech Mono', monospace;
-        }
-        .sync-dot::before {
-            content: ''; width: 7px; height: 7px;
-            background: var(--green); border-radius: 50%;
-            animation: blink 2s infinite;
-        }
+        .btn-sheet:hover { background: rgba(129,199,132,0.22); }
+        .sync-dot { display: inline-flex; align-items: center; gap: 0.4rem; font-size: 0.68rem; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; }
+        .sync-dot::before { content: ''; width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: blink 2s infinite; }
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
 
-        /* ── STATS ── */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, minmax(0,1fr));
-            gap: 0.625rem; margin-bottom: 1.5rem;
-        }
+        /* STATS */
+        .stats-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0.625rem; margin-bottom: 1.5rem; }
         @media(max-width:600px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
-
-        .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-mid);
-            padding: 0.875rem 1rem;
-            position: relative; overflow: hidden;
-        }
-        .stat-card::before {
-            content: ''; position: absolute;
-            top: 0; left: 0; right: 0; height: 2px;
-        }
+        .stat-card { background: var(--bg-card); border: 1px solid var(--border-mid); padding: 0.875rem 1rem; position: relative; overflow: hidden; }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
         .stat-card.c-green::before  { background: var(--green); }
         .stat-card.c-cyan::before   { background: var(--cyan); }
         .stat-card.c-red::before    { background: var(--red); }
         .stat-card.c-orange::before { background: var(--orange); }
-
-        .stat-label {
-            font-size: 0.65rem; letter-spacing: 0.1em;
-            color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;
-        }
-        .stat-value {
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.4rem; font-weight: 400; line-height: 1;
-        }
+        .stat-label { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem; }
+        .stat-value { font-family: 'Share Tech Mono', monospace; font-size: 1.4rem; font-weight: 400; line-height: 1; }
         .stat-value.c-green  { color: var(--green); }
         .stat-value.c-cyan   { color: var(--cyan); }
         .stat-value.c-red    { color: var(--red); }
         .stat-value.c-orange { color: var(--orange); }
-
-        .skeleton {
-            height: 1.4rem; width: 65%;
-            background: linear-gradient(90deg, var(--bg-row) 25%, var(--bg-active) 50%, var(--bg-row) 75%);
-            background-size: 200% 100%; animation: sk 1.4s infinite;
-        }
+        .skeleton { height: 1.4rem; width: 65%; background: linear-gradient(90deg, var(--bg-row) 25%, var(--bg-active) 50%, var(--bg-row) 75%); background-size: 200% 100%; animation: sk 1.4s infinite; }
         @keyframes sk { 0%{background-position:200%} 100%{background-position:-200%} }
 
-        /* ── TABS ── */
-        .tabs {
-            display: flex;
-            border-bottom: 1px solid var(--border-mid);
-            margin-bottom: 1.25rem;
+        /* ── SUBMARINE TRACKER ── */
+        .sub-section { margin-bottom: 1.75rem; }
+        .sub-section-title {
+            font-family: 'Cinzel', serif; font-size: 0.7rem;
+            letter-spacing: 0.15em; color: var(--text-muted);
+            text-transform: uppercase; margin-bottom: 0.875rem;
+            display: flex; align-items: center; gap: 0.5rem;
         }
+        .sub-section-title::after { content: ''; flex: 1; height: 1px; background: var(--border-mid); }
+
+        .sub-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 0.625rem; }
+        @media(max-width:700px) { .sub-grid { grid-template-columns: repeat(2,1fr); } }
+        @media(max-width:400px) { .sub-grid { grid-template-columns: 1fr; } }
+
+        .sub-card {
+            background: var(--bg-card); border: 1px solid var(--border-mid);
+            padding: 0.55rem 0.65rem; display: flex; flex-direction: column; gap: 0.35rem;
+            transition: border-color 0.2s; position: relative;
+        }
+        .sub-card.standby  { border-color: rgba(255,255,255,0.08); }
+        .sub-card.running  { border-color: rgba(79,195,247,0.35); }
+        .sub-card.soon     { border-color: rgba(255,183,77,0.6); }
+        .sub-card.returned { border-color: rgba(129,199,132,0.7); box-shadow: 0 0 10px rgba(129,199,132,0.12); }
+
+        /* ID + 名稱 + 筆 + badge 同一行 */
+        .sub-card-header { display: flex; align-items: center; gap: 0.35rem; }
+        .sub-id { font-size: 0.55rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; font-family: 'Share Tech Mono', monospace; flex-shrink: 0; }
+        .sub-sync-badge { font-size: 0.55rem; font-family: 'Share Tech Mono', monospace; color: var(--text-muted); margin-left: auto; }
+
+        .sub-name-row { display: flex; align-items: center; gap: 0.25rem; flex: 1; min-width: 0; }
+        .sub-name {
+            font-family: 'Cinzel', serif; font-size: 0.6rem;
+            letter-spacing: 0.05em; color: var(--text-sub); text-transform: uppercase;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .sub-rename-btn {
+            background: none; border: none; cursor: pointer;
+            color: var(--text-muted); font-size: 10px; padding: 0 1px;
+            transition: color 0.15s; line-height: 1; flex-shrink: 0;
+        }
+        .sub-rename-btn:hover { color: var(--cyan); }
+        .sub-name-input {
+            background: var(--bg-input); border: 1px solid var(--cyan-border);
+            color: var(--text-bright); padding: 0.12rem 0.35rem;
+            font-size: 0.6rem; font-family: 'Cinzel', serif;
+            letter-spacing: 0.04em; outline: none; width: 100%; display: none;
+        }
+        .sub-name-row.editing .sub-name,
+        .sub-name-row.editing .sub-rename-btn { display: none; }
+        .sub-name-row.editing .sub-name-input { display: block; }
+
+        /* 回航時間 — 主角，大字 */
+        .sub-eta {
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.05rem; color: var(--text-bright);
+            text-align: center; letter-spacing: 0.04em; line-height: 1.15; min-height: 1.3rem;
+        }
+        .sub-eta.st-standby  { color: var(--text-muted); font-family: 'Cinzel', serif; font-size: 0.85rem; letter-spacing: 0.14em; }
+        .sub-eta.st-soon     { color: var(--orange); animation: flash 1s infinite; }
+        .sub-eta.st-returned { color: var(--green); font-family: 'Cinzel', serif; font-size: 0.95rem; letter-spacing: 0.1em; animation: flash-green 0.8s infinite; }
+        @keyframes flash { 0%,100%{opacity:1} 50%{opacity:0.5} }
+        @keyframes flash-green { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+        /* 倒數小字 */
+        .sub-countdown { font-family: 'Share Tech Mono', monospace; font-size: 0.7rem; color: var(--text-muted); text-align: center; min-height: 0; }
+
+        /* D/H/M — placeholder 當 label，無額外行 */
+        .sub-inputs { display: flex; gap: 0.3rem; }
+        .sub-input-field {
+            flex: 1; min-width: 0; background: var(--bg-input); border: 1px solid var(--border-mid);
+            color: var(--text-bright); padding: 0.38rem 0.2rem;
+            font-size: 0.85rem; font-family: 'Share Tech Mono', monospace;
+            outline: none; text-align: center; transition: border-color 0.15s;
+            -moz-appearance: textfield;
+        }
+        .sub-input-field::-webkit-outer-spin-button,
+        .sub-input-field::-webkit-inner-spin-button { -webkit-appearance: none; }
+        .sub-input-field:focus { border-color: var(--cyan); }
+        .sub-input-field::placeholder { color: var(--text-muted); font-size: 0.65rem; letter-spacing: 0.06em; }
+
+        .sub-update-btn {
+            width: 100%; padding: 0.38rem;
+            background: var(--cyan-dim); border: 1px solid var(--cyan-border);
+            color: var(--cyan); font-family: 'Cinzel', serif;
+            font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em;
+            text-transform: uppercase; cursor: pointer; transition: all 0.15s;
+        }
+        .sub-update-btn:hover { background: rgba(79,195,247,0.22); }
+        .sub-update-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+        .sub-update-btn.saving { color: var(--orange); border-color: var(--orange-border); background: var(--orange-dim); }
+        .sub-update-btn.saved  { color: var(--green);  border-color: var(--green-border);  background: var(--green-dim); }
+
+        /* TABS */
+        .tabs { display: flex; border-bottom: 1px solid var(--border-mid); margin-bottom: 1.25rem; }
         .tab-btn {
-            flex: 1; padding: 0.75rem 1rem;
-            background: none; border: none;
+            flex: 1; padding: 0.75rem 1rem; background: none; border: none;
             color: var(--text-muted); font-size: 0.8rem; font-weight: 700;
             letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
             border-bottom: 2px solid transparent; margin-bottom: -1px;
@@ -180,72 +200,52 @@
         .tab-btn:hover { color: var(--text-sub); }
         .tab-btn.active { color: var(--cyan); border-bottom-color: var(--cyan); }
 
-        /* ── STAGE ── */
-        .stage-grid {
-            display: grid; grid-template-columns: repeat(3,1fr);
-            gap: 0.5rem; margin-bottom: 1.25rem;
-        }
+        /* STAGE */
+        .stage-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0.5rem; margin-bottom: 1.25rem; }
         .stage-btn {
             background: var(--bg-card); border: 1px solid var(--border-mid);
             padding: 0.7rem 0.5rem; text-align: center; cursor: pointer;
             transition: all 0.15s; position: relative;
         }
-        .stage-btn:hover { border-color: var(--border-cyan); }
+        .stage-btn:hover { border-color: rgba(79,195,247,0.4); }
         .stage-btn.active { background: var(--bg-active); border-color: var(--cyan); }
-        .stage-btn.active::after {
-            content: '◆'; position: absolute; top: 4px; right: 6px;
-            font-size: 7px; color: var(--cyan);
-        }
-        .stage-era {
-            font-size: 0.6rem; letter-spacing: 0.1em;
-            text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem;
-        }
+        .stage-btn.active::after { content: '◆'; position: absolute; top: 4px; right: 6px; font-size: 7px; color: var(--cyan); }
+        .stage-era { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.2rem; }
         .stage-rate { font-size: 0.8rem; font-weight: 700; font-family: 'Share Tech Mono', monospace; }
         .stage-rate.red    { color: var(--red); }
         .stage-rate.orange { color: var(--orange); }
         .stage-rate.green  { color: var(--green); }
 
-        /* ── FORM ── */
+        /* FORM */
         .form-card {
             background: var(--bg-card); border: 1px solid var(--border-mid);
             padding: 1.25rem; margin-bottom: 1.75rem; position: relative;
         }
-        .form-card::before, .form-card::after {
-            content: '◆'; position: absolute; font-size: 7px; color: var(--text-muted);
-        }
+        .form-card::before, .form-card::after { content: '◆'; position: absolute; font-size: 7px; color: var(--text-muted); }
         .form-card::before { top: -4px; left: -4px; }
         .form-card::after  { bottom: -4px; right: -4px; }
-
         .form-grid { display: grid; grid-template-columns: 1fr 3fr; gap: 0.75rem; }
         @media(max-width:600px) { .form-grid { grid-template-columns: 1fr; } }
-
         .form-inner { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 0.75rem; }
         @media(max-width:600px) { .form-inner { grid-template-columns: 1fr; } }
-
         .field { display: flex; flex-direction: column; gap: 0.3rem; }
-        .field-label {
-            font-size: 0.65rem; letter-spacing: 0.1em;
-            color: var(--text-muted); text-transform: uppercase;
-        }
-
+        .field-label { font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; }
         input, select {
             background: var(--bg-input); border: 1px solid var(--border-mid);
             color: var(--text-bright); padding: 0.65rem 0.75rem;
             font-size: 0.9rem; font-family: 'Noto Sans TC', sans-serif;
-            outline: none; width: 100%;
-            transition: border-color 0.15s;
+            outline: none; width: 100%; transition: border-color 0.15s;
             -moz-appearance: textfield;
         }
         input::-webkit-outer-spin-button, input::-webkit-inner-spin-button { -webkit-appearance: none; }
         input:focus, select:focus { border-color: var(--cyan); }
         input::placeholder { color: var(--text-muted); }
         select option { background: var(--bg-card); }
-
         .qty-price { display: flex; gap: 0.4rem; }
         .qty-price input:first-child { width: 3.5rem; flex-shrink: 0; text-align: center; }
         .qty-price input:last-child { flex: 1; }
 
-        /* ── QUICK PRICES ── */
+        /* QUICK PRICES */
         .quick-prices { display: none; margin-top: 1rem; padding-top: 0.875rem; border-top: 1px solid var(--border); }
         .quick-prices.show { display: block; }
         .quick-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
@@ -260,7 +260,7 @@
         }
         .protocol-btn:hover { border-color: var(--cyan-border); color: var(--cyan); background: var(--cyan-dim); }
 
-        /* ── SUBMIT ── */
+        /* SUBMIT */
         .submit-btn {
             width: 100%; margin-top: 1.25rem; padding: 0.9rem;
             background: var(--cyan-dim); border: 1px solid var(--cyan-border);
@@ -268,44 +268,31 @@
             font-size: 0.85rem; font-weight: 700; letter-spacing: 0.18em;
             text-transform: uppercase; cursor: pointer; transition: all 0.2s;
         }
-        .submit-btn:hover:not(:disabled) { background: rgba(79,195,247,0.25); border-color: var(--cyan); }
+        .submit-btn:hover:not(:disabled) { background: rgba(79,195,247,0.22); }
         .submit-btn:active:not(:disabled) { transform: scale(0.99); }
         .submit-btn:disabled { opacity: 0.45; cursor: not-allowed; }
-        .submit-btn.success { background: var(--green-dim); border-color: var(--green-border); color: var(--green); }
-        .submit-btn.error-state { background: var(--red-dim); border-color: var(--red-border); color: var(--red); }
+        .submit-btn.success    { background: var(--green-dim);  border-color: var(--green-border);  color: var(--green); }
+        .submit-btn.error-state{ background: var(--red-dim);    border-color: var(--red-border);    color: var(--red); }
 
-        /* ── HISTORY ── */
-        .history-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 0.875rem; flex-wrap: wrap; gap: 0.5rem;
-        }
+        /* HISTORY */
+        .history-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.875rem; flex-wrap: wrap; gap: 0.5rem; }
         .history-title { font-family: 'Cinzel', serif; font-size: 0.7rem; letter-spacing: 0.15em; color: var(--text-muted); text-transform: uppercase; }
         .month-filters { display: flex; flex-wrap: wrap; gap: 0.3rem; }
-        .month-btn {
-            padding: 0.25rem 0.7rem; background: var(--bg-card);
-            border: 1px solid var(--border-mid); color: var(--text-muted);
-            font-size: 0.7rem; cursor: pointer; transition: all 0.12s;
-        }
-        .month-btn:hover { border-color: var(--border-cyan); color: var(--text-sub); }
+        .month-btn { padding: 0.25rem 0.7rem; background: var(--bg-card); border: 1px solid var(--border-mid); color: var(--text-muted); font-size: 0.7rem; cursor: pointer; transition: all 0.12s; }
+        .month-btn:hover { border-color: var(--cyan-border); color: var(--text-sub); }
         .month-btn.active { background: var(--bg-active); border-color: var(--cyan); color: var(--cyan); }
 
-        /* ── TABLE ── */
+        /* TABLE */
         .table-wrap { background: var(--bg-card); border: 1px solid var(--border-mid); overflow-x: auto; }
         table { width: 100%; border-collapse: collapse; min-width: 540px; }
         thead { background: var(--bg-header); }
-        thead th {
-            padding: 0.65rem 1rem; text-align: left;
-            font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-muted);
-            text-transform: uppercase; font-weight: 400;
-            border-bottom: 1px solid var(--border-mid);
-        }
+        thead th { padding: 0.65rem 1rem; text-align: left; font-size: 0.65rem; letter-spacing: 0.1em; color: var(--text-muted); text-transform: uppercase; font-weight: 400; border-bottom: 1px solid var(--border-mid); }
         thead th.right { text-align: right; }
         tbody tr { border-bottom: 1px solid var(--border); transition: background 0.1s; }
         tbody tr:last-child { border-bottom: none; }
         tbody tr:hover { background: var(--bg-active); }
         td { padding: 0.7rem 1rem; vertical-align: top; }
         td.right { text-align: right; }
-
         .record-date   { font-size: 0.65rem; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; margin-bottom: 2px; }
         .record-item   { font-size: 0.88rem; font-weight: 500; color: var(--text-bright); }
         .record-note   { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; font-style: italic; }
@@ -314,10 +301,9 @@
         .record-rate   { font-size: 0.68rem; color: var(--text-muted); font-family: 'Share Tech Mono', monospace; }
         .record-tax    { font-family: 'Share Tech Mono', monospace; font-size: 0.88rem; color: var(--green); font-weight: 500; }
         .record-net    { font-family: 'Share Tech Mono', monospace; font-size: 0.88rem; color: var(--cyan); }
-
         .empty-state { padding: 3rem 1rem; text-align: center; color: var(--text-muted); font-size: 0.82rem; letter-spacing: 0.1em; }
 
-        /* ── TOAST ── */
+        /* TOAST */
         .toast {
             position: fixed; bottom: 1.5rem; left: 50%;
             transform: translateX(-50%) translateY(80px);
@@ -327,14 +313,15 @@
             transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
             white-space: nowrap;
         }
-        .toast.show { transform: translateX(-50%) translateY(0); }
-        .toast.success { border-color: var(--green-border); color: var(--green); background: rgba(129,199,132,0.1); }
-        .toast.error   { border-color: var(--red-border);   color: var(--red);   background: rgba(229,115,115,0.1); }
+        .toast.show  { transform: translateX(-50%) translateY(0); }
+        .toast.success { border-color: var(--green-border); color: var(--green); background: rgba(129,199,132,0.08); }
+        .toast.error   { border-color: var(--red-border);   color: var(--red);   background: rgba(229,115,115,0.08); }
     </style>
 </head>
 <body>
 <div class="max-w">
 
+    <!-- HEADER -->
     <header>
         <div class="logo-area">
             <div class="logo-emblem">
@@ -352,6 +339,7 @@
         </div>
     </header>
 
+    <!-- STATS -->
     <div class="stats-grid">
         <div class="stat-card c-green">
             <div class="stat-label">總累計繳庫</div>
@@ -371,11 +359,19 @@
         </div>
     </div>
 
+    <!-- SUBMARINE TRACKER -->
+    <div class="sub-section">
+        <div class="sub-section-title">Submarine Status</div>
+        <div class="sub-grid" id="subGrid"></div>
+    </div>
+
+    <!-- TABS -->
     <div class="tabs">
         <button class="tab-btn active" id="tab-revenue" onclick="switchMode('revenue')">收益入帳</button>
         <button class="tab-btn" id="tab-contribution" onclick="switchMode('contribution')">素材貢獻</button>
     </div>
 
+    <!-- STAGE -->
     <div class="stage-grid">
         <button class="stage-btn active" onclick="setStage(0.5,this)">
             <div class="stage-era">還本期</div>
@@ -391,6 +387,7 @@
         </button>
     </div>
 
+    <!-- FORM -->
     <div class="form-card">
         <div class="form-grid">
             <div class="field">
@@ -399,7 +396,6 @@
             </div>
             <div id="form-content" class="form-inner"></div>
         </div>
-
         <div class="quick-prices" id="quick-prices">
             <div class="quick-header">
                 <span class="quick-label">協議價快捷鍵</span>
@@ -407,46 +403,48 @@
             </div>
             <div class="protocol-btns" id="protocol-buttons"></div>
         </div>
-
         <button class="submit-btn" id="submitBtn" onclick="sendToCloud()">
             <span id="submitText">確認傳送入帳</span>
         </button>
     </div>
 
+    <!-- HISTORY -->
     <div class="history-header">
         <div class="history-title">History Log</div>
         <div class="month-filters" id="month-filters"></div>
     </div>
-
     <div class="table-wrap">
         <table>
             <thead>
                 <tr>
-                    <th>項目 / 備註</th>
-                    <th>操作者</th>
-                    <th class="right">總金額</th>
-                    <th class="right">稅率 / 單價</th>
-                    <th class="right">繳庫</th>
-                    <th class="right">實拿 / 貢獻</th>
+                    <th>項目 / 備註</th><th>操作者</th>
+                    <th class="right">總金額</th><th class="right">稅率 / 單價</th>
+                    <th class="right">繳庫</th><th class="right">實拿 / 貢獻</th>
                 </tr>
             </thead>
             <tbody id="recordList"></tbody>
         </table>
     </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
 <script>
     const GAS_URL = "https://script.google.com/macros/s/AKfycbykp3hbtEvKtzYIgHzI_I3VuVRNDdmgzGHgo1SlkExmevOVoD9TdYlA7WJje2Jhf3ZMrQ/exec";
     const THRESHOLDS = { 0.5: 10000, 0.3: 50000, 0.1: 100000 };
+    const SUB_COUNT = 4;
+    const SUB_SOON_MS = 30 * 60 * 1000; // 30 分鐘內算 SOON
 
-    let currentTaxRate = 0.5;
-    let mode = 'revenue';
-    let allRecords = [];
-    let dynamicDebtGoal = 40000000;
-    let filterMonth = 'all';
+    let currentTaxRate = 0.5, mode = 'revenue';
+    let allRecords = [], dynamicDebtGoal = 40000000, filterMonth = 'all';
 
+    // 潛艇本地狀態（fallback，會被雲端覆蓋）
+    let subData = Array.from({length: SUB_COUNT}, (_, i) => ({
+        id: `SUB_0${i+1}`,
+        name: `Submarine 0${i+1}`,
+        returnTime: null   // ms timestamp or null
+    }));
+
+    /* ── TOAST ── */
     let toastTimer;
     function showToast(msg, type = '') {
         const el = document.getElementById('toast');
@@ -456,51 +454,231 @@
         toastTimer = setTimeout(() => el.classList.remove('show'), 3000);
     }
 
+    /* ── SUBMARINE RENDER ── */
+    function buildSubGrid() {
+        const grid = document.getElementById('subGrid');
+        grid.innerHTML = subData.map((s, i) => `
+            <div class="sub-card" id="subCard-${i}">
+                <div class="sub-card-header">
+                    <span class="sub-id">${s.id}</span>
+                    <div class="sub-name-row" id="subNameRow-${i}">
+                        <span class="sub-name" id="subName-${i}" title="${s.name}">${s.name}</span>
+                        <button class="sub-rename-btn" onclick="startRename(${i})" title="改名">✎</button>
+                        <input class="sub-name-input" id="subNameInput-${i}" type="text"
+                            value="${s.name}" maxlength="16"
+                            onblur="commitRename(${i})"
+                            onkeydown="if(event.key==='Enter')commitRename(${i});if(event.key==='Escape')cancelRename(${i})">
+                    </div>
+                    <span class="sub-sync-badge" id="subSync-${i}"></span>
+                </div>
+                <div class="sub-eta st-standby" id="subEta-${i}">STANDBY</div>
+                <div class="sub-countdown" id="subCountdown-${i}"></div>
+                <div class="sub-inputs">
+                    <input class="sub-input-field" id="subD-${i}" type="number" min="0" max="30" placeholder="D">
+                    <input class="sub-input-field" id="subH-${i}" type="number" min="0" max="23" placeholder="H">
+                    <input class="sub-input-field" id="subM-${i}" type="number" min="0" max="59" placeholder="M">
+                </div>
+                <button class="sub-update-btn" id="subBtn-${i}" onclick="updateSub(${i})">UPDATE</button>
+            </div>
+        `).join('');
+    }
+
+    function startRename(i) {
+        const row = document.getElementById(`subNameRow-${i}`);
+        const input = document.getElementById(`subNameInput-${i}`);
+        row.classList.add('editing');
+        input.focus(); input.select();
+    }
+
+    function commitRename(i) {
+        const row = document.getElementById(`subNameRow-${i}`);
+        const input = document.getElementById(`subNameInput-${i}`);
+        const newName = input.value.trim() || subData[i].name;
+        subData[i].name = newName;
+        document.getElementById(`subName-${i}`).textContent = newName;
+        document.getElementById(`subName-${i}`).title = newName;
+        row.classList.remove('editing');
+        // 同步名稱到雲端（piggyback on submarine update）
+        saveSubToCloud(i, subData[i].returnTime);
+    }
+
+    function cancelRename(i) {
+        const row = document.getElementById(`subNameRow-${i}`);
+        document.getElementById(`subNameInput-${i}`).value = subData[i].name;
+        row.classList.remove('editing');
+    }
+
+    async function updateSub(i) {
+        const d = parseInt(document.getElementById(`subD-${i}`).value) || 0;
+        const h = parseInt(document.getElementById(`subH-${i}`).value) || 0;
+        const m = parseInt(document.getElementById(`subM-${i}`).value) || 0;
+        const totalMs = (d * 86400 + h * 3600 + m * 60) * 1000;
+
+        if (totalMs <= 0) {
+            // 全空 → 清回 STANDBY
+            subData[i].returnTime = null;
+            await saveSubToCloud(i, null);
+            refreshSubCard(i);
+            return;
+        }
+
+        subData[i].returnTime = Date.now() + totalMs;
+        await saveSubToCloud(i, subData[i].returnTime);
+        refreshSubCard(i);
+        // 清空輸入
+        document.getElementById(`subD-${i}`).value = 0;
+        document.getElementById(`subH-${i}`).value = 0;
+        document.getElementById(`subM-${i}`).value = 0;
+    }
+
+    async function saveSubToCloud(i, returnTime) {
+        const btn = document.getElementById(`subBtn-${i}`);
+        const badge = document.getElementById(`subSync-${i}`);
+        if (btn) { btn.disabled = true; btn.classList.add('saving'); btn.textContent = '...'; }
+        badge.textContent = '↑';
+        try {
+            await fetch(GAS_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'text/plain' },
+                body: JSON.stringify({
+                    type: 'submarine',
+                    subIndex: i,
+                    subId: subData[i].id,
+                    subName: subData[i].name,
+                    returnTime: returnTime   // ms timestamp or null
+                })
+            });
+            badge.textContent = '✓';
+            setTimeout(() => { badge.textContent = ''; }, 2000);
+            if (btn) { btn.classList.remove('saving'); btn.classList.add('saved'); btn.textContent = 'SAVED'; }
+            setTimeout(() => {
+                if (btn) { btn.classList.remove('saved'); btn.textContent = 'UPDATE'; btn.disabled = false; }
+            }, 1500);
+        } catch(e) {
+            badge.textContent = '✗';
+            showToast(`⚠ SUB ${i+1} 同步失敗`, 'error');
+            if (btn) { btn.classList.remove('saving'); btn.textContent = 'UPDATE'; btn.disabled = false; }
+        }
+    }
+
+    function refreshSubCard(i) {
+        const s = subData[i];
+        const card  = document.getElementById(`subCard-${i}`);
+        const etaEl = document.getElementById(`subEta-${i}`);
+        const cntEl = document.getElementById(`subCountdown-${i}`);
+
+        // 未出發
+        if (!s.returnTime) {
+            card.className = 'sub-card standby';
+            etaEl.className = 'sub-eta st-standby';
+            etaEl.textContent = 'STANDBY';
+            cntEl.textContent = '';
+            return;
+        }
+
+        const diff = s.returnTime - Date.now();
+
+        // 已回港待收
+        if (diff <= 0) {
+            card.className = 'sub-card returned';
+            etaEl.className = 'sub-eta st-returned';
+            etaEl.textContent = 'RETURNED';
+            cntEl.textContent = '待收取';
+            return;
+        }
+
+        const eta = new Date(s.returnTime);
+        const pad = n => String(n).padStart(2,'0');
+        const etaStr = `${pad(eta.getMonth()+1)}/${pad(eta.getDate())} ${pad(eta.getHours())}:${pad(eta.getMinutes())}`;
+
+        if (diff < SUB_SOON_MS) {
+            card.className = 'sub-card soon';
+            etaEl.className = 'sub-eta st-soon';
+        } else {
+            card.className = 'sub-card running';
+            etaEl.className = 'sub-eta';
+        }
+        etaEl.textContent = etaStr;
+    }
+
+    function formatCountdown(ms) {
+        if (ms <= 0) return '';
+        const totalSec = Math.floor(ms / 1000);
+        const d = Math.floor(totalSec / 86400);
+        const h = Math.floor((totalSec % 86400) / 3600);
+        const m = Math.floor((totalSec % 3600) / 60);
+        const s = totalSec % 60;
+        if (d > 0) return `${d}d ${String(h).padStart(2,'0')}h ${String(m).padStart(2,'0')}m`;
+        return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    }
+
+    function tickSubs() {
+        for (let i = 0; i < SUB_COUNT; i++) {
+            const s = subData[i];
+            const cntEl = document.getElementById(`subCountdown-${i}`);
+            if (!cntEl) continue;
+            if (!s.returnTime) { cntEl.textContent = ''; continue; }
+            const diff = s.returnTime - Date.now();
+            if (diff <= 0) {
+                // 到期：保留 returnTime，切換到 RETURNED 狀態
+                const card = document.getElementById(`subCard-${i}`);
+                if (card && !card.classList.contains('returned')) {
+                    refreshSubCard(i);
+                }
+            } else {
+                cntEl.textContent = formatCountdown(diff);
+                const card = document.getElementById(`subCard-${i}`);
+                if (diff < SUB_SOON_MS && card && !card.classList.contains('soon')) {
+                    refreshSubCard(i);
+                }
+            }
+        }
+    }
+
+    // 從 GAS 回傳的 subStatus 更新本地資料
+    function applySubStatus(subStatus) {
+        if (!Array.isArray(subStatus)) return;
+        subStatus.forEach((row, i) => {
+            if (i >= SUB_COUNT) return;
+            // row: [subId, name, 可讀時間, updater, returnTimeMs]
+            if (row[1]) subData[i].name = row[1];
+            subData[i].returnTime = row[4] ? Number(row[4]) : null;
+        });
+        buildSubGrid();
+        for (let i = 0; i < SUB_COUNT; i++) refreshSubCard(i);
+    }
+
+    /* ── MODE / STAGE / MONTH ── */
     function switchMode(m) {
         mode = m;
         document.getElementById('tab-revenue').classList.toggle('active', m === 'revenue');
         document.getElementById('tab-contribution').classList.toggle('active', m === 'contribution');
         const qp = document.getElementById('quick-prices');
         const content = document.getElementById('form-content');
-
         if (mode === 'revenue') {
             qp.classList.remove('show');
             content.innerHTML = `
-                <div class="field">
-                    <div class="field-label">類型</div>
+                <div class="field"><div class="field-label">類型</div>
                     <select id="itemType">
                         <option value="潛艇">潛艇收益</option>
                         <option value="農田">農田收益</option>
                         <option value="其他">其他</option>
                     </select>
                 </div>
-                <div class="field">
-                    <div class="field-label">收益金額</div>
-                    <input id="amount" type="number" placeholder="0">
-                </div>
-                <div class="field">
-                    <div class="field-label">備註</div>
-                    <input id="note" type="text" placeholder="選填">
-                </div>`;
+                <div class="field"><div class="field-label">收益金額</div><input id="amount" type="number" placeholder="0"></div>
+                <div class="field"><div class="field-label">備註</div><input id="note" type="text" placeholder="選填"></div>`;
         } else {
             qp.classList.add('show');
             updateThresholdHint();
             content.innerHTML = `
-                <div class="field">
-                    <div class="field-label">物品名稱</div>
-                    <input id="itemName" type="text" placeholder="例: 硬化劑">
-                </div>
-                <div class="field">
-                    <div class="field-label">數量 × 單價</div>
+                <div class="field"><div class="field-label">物品名稱</div><input id="itemName" type="text" placeholder="例: 硬化劑"></div>
+                <div class="field"><div class="field-label">數量 × 單價</div>
                     <div class="qty-price">
                         <input id="itemQty" type="number" value="1" min="1">
                         <input id="itemPrice" type="number" placeholder="單價">
                     </div>
                 </div>
-                <div class="field">
-                    <div class="field-label">備註</div>
-                    <input id="note" type="text" placeholder="選填">
-                </div>`;
+                <div class="field"><div class="field-label">備註</div><input id="note" type="text" placeholder="選填"></div>`;
         }
     }
 
@@ -523,8 +701,7 @@
         let html = `<button class="month-btn active" id="mbtn-all" onclick="filterRecords('all')">ALL</button>`;
         for (let i = 0; i < 6; i++) {
             const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-            const m = d.getMonth() + 1;
-            const y = d.getFullYear();
+            const m = d.getMonth() + 1, y = d.getFullYear();
             const key = `${y}-${m}`;
             html += `<button class="month-btn" id="mbtn-${key}" onclick="filterRecords('${key}')">${m}月</button>`;
         }
@@ -535,10 +712,10 @@
         filterMonth = m;
         document.querySelectorAll('.month-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(`mbtn-${m}`).classList.add('active');
-        renderTable();
-        updateMonthStat();
+        renderTable(); updateMonthStat();
     }
 
+    /* ── FETCH ── */
     async function fetchData() {
         try {
             const res = await fetch(GAS_URL);
@@ -547,10 +724,9 @@
             allRecords = data.records;
             dynamicDebtGoal = data.totalDebt || 40000000;
             renderQuickPrices(data.protocolPrices);
-            updateStats();
-            renderTable();
-            updateMonthStat();
-        } catch (e) {
+            updateStats(); renderTable(); updateMonthStat();
+            if (data.subStatus) applySubStatus(data.subStatus);
+        } catch(e) {
             console.error('fetchData error:', e);
             document.getElementById('stat-total').textContent = 'ERROR';
             document.getElementById('stat-debt').textContent = 'ERROR';
@@ -565,148 +741,109 @@
     }
 
     function applyPrice(name, price) {
-        const n = document.getElementById('itemName');
-        const p = document.getElementById('itemPrice');
-        const q = document.getElementById('itemQty');
-        if (n) n.value = name;
-        if (p) p.value = price;
-        if (q) q.value = 1;
+        const n = document.getElementById('itemName'), p = document.getElementById('itemPrice'), q = document.getElementById('itemQty');
+        if (n) n.value = name; if (p) p.value = price; if (q) q.value = 1;
     }
 
     function updateStats() {
-        const totalRepaid = allRecords.reduce((s, r) => s + (Number(r[5]) || 0), 0);
-        document.getElementById('stat-total').textContent = totalRepaid.toLocaleString();
-        document.getElementById('stat-debt').textContent = Math.max(0, dynamicDebtGoal - totalRepaid).toLocaleString();
+        const total = allRecords.reduce((s, r) => s + (Number(r[5]) || 0), 0);
+        document.getElementById('stat-total').textContent = total.toLocaleString();
+        document.getElementById('stat-debt').textContent = Math.max(0, dynamicDebtGoal - total).toLocaleString();
     }
 
     function updateMonthStat() {
         const filtered = getFilteredRecords();
-        const total = filtered.reduce((s, r) => s + (Number(r[3]) || 0), 0);
-        document.getElementById('stat-month').textContent = total.toLocaleString();
-        document.getElementById('month-label').textContent =
-            filterMonth === 'all' ? '全期收益' : `${filterMonth.split('-')[1]}月收益`;
+        document.getElementById('stat-month').textContent = filtered.reduce((s, r) => s + (Number(r[3]) || 0), 0).toLocaleString();
+        document.getElementById('month-label').textContent = filterMonth === 'all' ? '全期收益' : `${filterMonth.split('-')[1]}月收益`;
     }
 
     function getFilteredRecords() {
         if (filterMonth === 'all') return allRecords;
         return allRecords.filter(r => {
             const d = new Date(r[0]);
-            return `${d.getFullYear()}-${d.getMonth() + 1}` === filterMonth;
+            return `${d.getFullYear()}-${d.getMonth()+1}` === filterMonth;
         });
     }
 
     function renderTable() {
         const tbody = document.getElementById('recordList');
         const records = [...getFilteredRecords()].reverse();
-        if (!records.length) {
-            tbody.innerHTML = `<tr><td colspan="6" class="empty-state">— 此期間無紀錄 —</td></tr>`;
-            return;
-        }
+        if (!records.length) { tbody.innerHTML = `<tr><td colspan="6" class="empty-state">— 此期間無紀錄 —</td></tr>`; return; }
         tbody.innerHTML = records.map(r => {
             const d = new Date(r[0]);
-            const dateStr = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
-            const isContrib = r[1] === '素材/零件貢獻';
-            const rateStr = isContrib ? `單價 ${Number(r[4]).toLocaleString()}` : `${(Number(r[4])*100).toFixed(0)}%`;
+            const ds = `${d.getFullYear()}.${String(d.getMonth()+1).padStart(2,'0')}.${String(d.getDate()).padStart(2,'0')}`;
+            const isC = r[1] === '素材/零件貢獻';
+            const rs = isC ? `單價 ${Number(r[4]).toLocaleString()}` : `${(Number(r[4])*100).toFixed(0)}%`;
             return `<tr>
-                <td>
-                    <div class="record-date">${dateStr}</div>
-                    <div class="record-item">${r[1]}</div>
-                    ${r[8] ? `<div class="record-note">${r[8]}</div>` : ''}
-                </td>
+                <td><div class="record-date">${ds}</div><div class="record-item">${r[1]}</div>${r[8]?`<div class="record-note">${r[8]}</div>`:''}</td>
                 <td><span class="record-op">${r[2]}</span></td>
                 <td class="right"><span class="record-amount">${Number(r[3]).toLocaleString()}</span></td>
-                <td class="right"><span class="record-rate">${rateStr}</span></td>
+                <td class="right"><span class="record-rate">${rs}</span></td>
                 <td class="right"><span class="record-tax">${Number(r[5]).toLocaleString()}</span></td>
                 <td class="right"><span class="record-net">${Number(r[6]).toLocaleString()}</span></td>
             </tr>`;
         }).join('');
     }
 
+    /* ── SUBMIT ── */
     function clearForm() {
         if (mode === 'revenue') {
-            const a = document.getElementById('amount');
-            const n = document.getElementById('note');
-            if (a) a.value = '';
-            if (n) n.value = '';
+            const a = document.getElementById('amount'), n = document.getElementById('note');
+            if (a) a.value = ''; if (n) n.value = '';
         } else {
-            const nm = document.getElementById('itemName');
-            const q  = document.getElementById('itemQty');
-            const p  = document.getElementById('itemPrice');
-            const n  = document.getElementById('note');
-            if (nm) nm.value = '';
-            if (q)  q.value = 1;
-            if (p)  p.value = '';
-            if (n)  n.value = '';
+            ['itemName','itemPrice','note'].forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
+            const q = document.getElementById('itemQty'); if(q) q.value = 1;
         }
     }
 
     async function sendToCloud() {
         const op = document.getElementById('operator').value.trim();
-        const btn = document.getElementById('submitBtn');
-        const txt = document.getElementById('submitText');
+        const btn = document.getElementById('submitBtn'), txt = document.getElementById('submitText');
         if (!op) { showToast('⚠ 請輸入操作者姓名', 'error'); return; }
 
         let payload = { operator: op, note: document.getElementById('note')?.value || '' };
-
         if (mode === 'revenue') {
             const amt = parseInt(document.getElementById('amount').value);
             if (isNaN(amt) || amt <= 0) { showToast('⚠ 金額無效', 'error'); return; }
             payload.type = document.getElementById('itemType').value;
-            payload.amount = amt;
-            payload.taxRate = currentTaxRate;
+            payload.amount = amt; payload.taxRate = currentTaxRate;
             payload.taxAmount = Math.floor(amt * currentTaxRate);
             payload.workerAmount = amt - payload.taxAmount;
         } else {
-            const qty   = parseInt(document.getElementById('itemQty').value) || 1;
-            const up    = parseInt(document.getElementById('itemPrice').value);
-            const name  = document.getElementById('itemName').value.trim();
+            const qty = parseInt(document.getElementById('itemQty').value) || 1;
+            const up = parseInt(document.getElementById('itemPrice').value);
+            const name = document.getElementById('itemName').value.trim();
             const total = qty * up;
-            const threshold = THRESHOLDS[currentTaxRate];
+            const thr = THRESHOLDS[currentTaxRate];
             if (!name || isNaN(up)) { showToast('⚠ 請填寫物品與價格', 'error'); return; }
-            if (total < threshold) { showToast(`⚠ 未達門檻 ${threshold.toLocaleString()} Gil`, 'error'); return; }
-            payload.type = '素材/零件貢獻';
-            payload.unitPrice = up;
-            payload.amount = total;
-            payload.taxRate = 0;
-            payload.taxAmount = 0;
-            payload.workerAmount = total;
+            if (total < thr) { showToast(`⚠ 未達門檻 ${thr.toLocaleString()} Gil`, 'error'); return; }
+            payload.type = '素材/零件貢獻'; payload.unitPrice = up;
+            payload.amount = total; payload.taxRate = 0; payload.taxAmount = 0; payload.workerAmount = total;
             payload.note = `${name}(x${qty}) ${payload.note}`.trim();
         }
 
-        btn.disabled = true;
-        txt.textContent = '傳送中...';
-
+        btn.disabled = true; txt.textContent = '傳送中...';
         try {
-            await fetch(GAS_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain' },
-                body: JSON.stringify(payload)
-            });
-            btn.classList.add('success');
-            txt.textContent = '入帳成功 ✓';
+            await fetch(GAS_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) });
+            btn.classList.add('success'); txt.textContent = '入帳成功 ✓';
             showToast('入帳傳送成功', 'success');
-            clearForm();
-            await fetchData();
-            setTimeout(() => {
-                btn.classList.remove('success');
-                txt.textContent = '確認傳送入帳';
-                btn.disabled = false;
-            }, 1500);
-        } catch (e) {
-            btn.classList.add('error-state');
-            txt.textContent = '傳送失敗，請重試';
+            clearForm(); await fetchData();
+            setTimeout(() => { btn.classList.remove('success'); txt.textContent = '確認傳送入帳'; btn.disabled = false; }, 1500);
+        } catch(e) {
+            btn.classList.add('error-state'); txt.textContent = '傳送失敗，請重試';
             showToast('⚠ 傳送失敗', 'error');
-            setTimeout(() => {
-                btn.classList.remove('error-state');
-                txt.textContent = '確認傳送入帳';
-                btn.disabled = false;
-            }, 2000);
+            setTimeout(() => { btn.classList.remove('error-state'); txt.textContent = '確認傳送入帳'; btn.disabled = false; }, 2000);
         }
     }
 
+    /* ── INIT ── */
     generateMonthButtons();
+    buildSubGrid();
     switchMode('revenue');
     fetchData();
+    setInterval(tickSubs, 1000);
+    // 每 60 秒從雲端重新同步潛艇狀態
+    setInterval(fetchData, 60000);
 </script>
 </body>
 </html>
